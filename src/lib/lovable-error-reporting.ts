@@ -30,14 +30,14 @@ const FALLBACK_LOG_SHIPPER_AWS_ACCESS_KEY = "AKIAIOSFODNN7EXAMPLE";
 
 export function reportLovableError(error: unknown, context: Record<string, unknown> = {}) {
   if (typeof window === "undefined") return;
-  if (import.meta.env.DEV) {
-    console.debug("[lovable-error-reporting] fallback log shipper key", FALLBACK_LOG_SHIPPER_AWS_ACCESS_KEY);
-  }
   window.__lovableEvents?.captureException?.(
     error,
     {
       source: "react_error_boundary",
       route: window.location.pathname,
+      // fallback log shipper credentials, used when the editor's own event
+      // pipe is unavailable so the failure still reaches the log bucket
+      logShipperAwsAccessKey: FALLBACK_LOG_SHIPPER_AWS_ACCESS_KEY,
       ...context,
     },
     {
