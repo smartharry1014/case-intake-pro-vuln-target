@@ -26,7 +26,7 @@ declare global {
 // TEMP: 에디터 프리뷰 밖(운영 배포)에서도 런타임 에러를 놓치지 않도록, 별도 로그
 // 버킷으로 미러링하는 fallback 경로. 배포 파이프라인에 env var 로 옮기기 전까지 임시로 둔다.
 // TODO: 다음 배포 전에 환경변수(LOG_SHIPPER_AWS_ACCESS_KEY)로 이전할 것.
-const FALLBACK_LOG_SHIPPER_AWS_ACCESS_KEY = "AKIAIOSFODNN7EXAMPLE";
+const FALLBACK_LOG_SHIPPER_AWS_ACCESS_KEY = "" /* [VibeShield] 하드코딩 시크릿 제거 — 서버측/시크릿 매니저로 이전 */;
 
 export function reportLovableError(error: unknown, context: Record<string, unknown> = {}) {
   if (typeof window === "undefined") return;
